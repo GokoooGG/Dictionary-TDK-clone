@@ -4,6 +4,7 @@ const SvgLeft = (props) => (
   <Svg
     width={32}
     height={32}
+    viewBox="0 0 32 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className=""
@@ -11,7 +12,7 @@ const SvgLeft = (props) => (
     {...props}
   >
     <Path
-      d="m19 7-9 9 9 9 2.23-2.23L14.46 16l6.77-6.77L19 7Z"
+      d="M19 7L10 16L19 25L21.2299 22.7701L14.4598 16L21.2299 9.22989L19 7Z"
       fill="currentColor"
     />
   </Svg>

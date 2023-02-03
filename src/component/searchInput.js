@@ -8,9 +8,13 @@ import Text from "./text";
 import Button from "./button";
 
 
-function SearchInput() {
+function SearchInput({ onChangeFocus }) {
     const [isFocus, setFocus] = React.useState(false)
     const [value, setValue] = React.useState('')
+
+    React.useEffect(() => {
+     onChangeFocus(isFocus)
+    },[isFocus,onChangeFocus])
 
     const onCancel = () => {
         setFocus(false)

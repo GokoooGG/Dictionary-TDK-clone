@@ -1,1 +1,8 @@
-
+{
+    "plugins": [
+        {
+            "name": "removeViewBox",
+            "active": false
+        }
+    ]
+}

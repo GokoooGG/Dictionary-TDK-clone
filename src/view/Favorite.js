@@ -1,12 +1,27 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import Box from '../component/box';
+import FocusAwareStatusBar from '../component/FocusAwareStatusBar';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function FavoriteView() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Favorite!</Text>
-      </View>
-    );
-  }
+  const insets = useSafeAreaInsets();
+  return (
+    <Box as={SafeAreaView} flex={1} style={{
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+    }}>
+      <Text>Favorite!</Text>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="white" />
+    </Box>
+  );
+}
 
-  export default FavoriteView;
+export default FavoriteView;

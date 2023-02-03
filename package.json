@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "svgr": "npx svgr -d, --out-dir ./src/component/icons --native --svg-props className=,color=black -- ./src/icons"
+    "svgr": "npx svgr -d, --svgo-config .svgorc.json --out-dir ./src/component/icons --native --svg-props className=,color=black  -- ./src/icons "
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.3",
@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.9.8",
     "react": "18.2.0",
     "react-native": "0.71.1",
+    "react-native-drop-shadow": "^0.0.6",
     "react-native-pager-view": "^6.1.2",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-screens": "^3.19.0",

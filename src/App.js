@@ -2,8 +2,11 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaView } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import {
+  SafeAreaProvider
+} from 'react-native-safe-area-context';
+
 
 import SearchView from './view/Search';
 import History from './view/History';
@@ -19,9 +22,9 @@ const Tab = createBottomTabNavigator();
 
 function SearchStack() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
       <HomeStack.Screen name="Search" component={SearchView} options={{ headerTitleAlign: 'center' }} />
-      <HomeStack.Screen name="Detail" component={DetailView} options={{ headerTitleAlign: 'center' }}/>
+      <HomeStack.Screen name="Detail" component={DetailView} options={{ headerTitleAlign: 'center' }} />
     </HomeStack.Navigator>
   );
 }
@@ -29,7 +32,7 @@ function SearchStack() {
 function App() {
   return (
     <ThemeProvider theme={theme} >
-      <Box flex={1} as={SafeAreaView}>
+      <SafeAreaProvider>
         <NavigationContainer>
           <Tab.Navigator initialRouteName='SearchHome' tabBar={props => <TabBar {...props} />}>
             <Tab.Screen name="History" component={History} options={{ headerTitleAlign: 'center' }} />
@@ -39,7 +42,7 @@ function App() {
             <Tab.Screen name="Favorite" component={FavoriteView} options={{ headerTitleAlign: 'center' }} />
           </Tab.Navigator>
         </NavigationContainer>
-      </Box>
+      </SafeAreaProvider>
     </ThemeProvider>
 
 

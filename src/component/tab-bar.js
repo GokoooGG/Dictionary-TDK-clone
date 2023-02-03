@@ -4,11 +4,19 @@ import Box from './box';
 import Button from './button';
 import { Search, Bookmark, Calendar } from './icons'
 import theme from '../utils/theme'
+import DropShadow from "react-native-drop-shadow";
 
 
 function TabBar({ state, descriptors, navigation }) {
     return (
-        <View style={{ flexDirection: 'row' }}>
+        <DropShadow style={{
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowRadius: 20,
+        }}>
+        <Box
+            flexDirection="row"
+            bg="white">
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =
@@ -36,7 +44,7 @@ function TabBar({ state, descriptors, navigation }) {
 
 
                 return label === 'SearchHome' ? (
-                    <Box key={label} p={15} mt={-15} borderRadius="full" bg="white">
+                    <Box key={label} p={15} mt={-15} borderRadius="full" bg="white" >
                         <Button
                             size={56}
                             bg="red"
@@ -55,14 +63,15 @@ function TabBar({ state, descriptors, navigation }) {
                         flex={1}
                         height={56}
                         onPress={onPress}>
-                        {label === 'History' && <Calendar stroke={theme.colors.textLight} />}
-                        {label === 'Favorite' && <Bookmark stroke={theme.colors.textLight} />}
-                        <Box size={3} bg={isFocused ? "red" : ""} mt={6} />
+                        {label === 'History' && <Calendar stroke={isFocused ? theme.colors.red : theme.colors.textLight} />}
+                        {label === 'Favorite' && <Bookmark stroke={isFocused ? theme.colors.red : theme.colors.textLight} />}
+                        <Box size={4} bg={isFocused ? "red" : ""} mt={6} borderRadius="full" />
                     </Button>
                 )
 
             })}
-        </View>
+        </Box>
+        </DropShadow>
     );
 }
 
