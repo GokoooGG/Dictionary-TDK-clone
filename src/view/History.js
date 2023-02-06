@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import theme from '../utils/theme';
 
 function History() {
   const insets = useSafeAreaInsets();
@@ -19,7 +20,7 @@ function History() {
       paddingRight: insets.right,
     }}>
       <Text>History!</Text>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="white" />
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={theme.colors.softRed} />
     </Box>
   );
 }

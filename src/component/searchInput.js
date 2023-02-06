@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, useRef } from 'react'
 import { Keyboard } from 'react-native'
 import Box from "./box"
 import Input from "./input";
@@ -8,13 +8,22 @@ import Text from "./text";
 import Button from "./button";
 
 
-function SearchInput({ onChangeFocus }) {
+const SearchInput = forwardRef(({ onChangeFocus }, ref) => {
     const [isFocus, setFocus] = React.useState(false)
     const [value, setValue] = React.useState('')
+    const input = useRef()
+
+    React.useImperativeHandle(ref, () => {
+        return {
+            handleCancel(){
+                onCancel()
+            }
+        };
+    })
 
     React.useEffect(() => {
-     onChangeFocus(isFocus)
-    },[isFocus,onChangeFocus])
+        onChangeFocus(isFocus)
+    }, [isFocus, onChangeFocus])
 
     const onCancel = () => {
         setFocus(false)
@@ -29,6 +38,7 @@ function SearchInput({ onChangeFocus }) {
         <Box flexDirection="row" alignItems="center">
             <Box position="relative" flex={1}>
                 <Input
+                    ref={input}
                     style={{
                         shadowColor: '#000',
                         shadowOpacity: 0.1,
@@ -55,7 +65,7 @@ function SearchInput({ onChangeFocus }) {
                         <Close color={theme.colors.textDark} />
                     </Button>
                 )}
-                <Button position="absolute" left={16} top={14}>
+                <Button onPress={() => { input.current.focus() }} position="absolute" left={16} top={14}>
                     <Search color={theme.colors.textMedium} />
                 </Button>
             </Box>
@@ -68,5 +78,5 @@ function SearchInput({ onChangeFocus }) {
         </Box>
     )
 }
-
+)
 export default SearchInput

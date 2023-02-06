@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import theme from '../utils/theme';
 
 function DetailView() {
   const insets = useSafeAreaInsets();
@@ -19,8 +20,10 @@ function DetailView() {
       paddingLeft: insets.left,
       paddingRight: insets.right,
     }}>
-      <Text>Search!</Text>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="white" />
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={theme.colors.softRed} />
+      <Box as={SafeAreaView} flex={1}>
+        <Text>Search!</Text>
+      </Box>
     </Box>
   );
 }
