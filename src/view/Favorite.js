@@ -6,11 +6,12 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import theme from '../utils/theme';
 
 function FavoriteView() {
   const insets = useSafeAreaInsets();
   return (
-    <Box as={SafeAreaView} flex={1} style={{
+    <Box as={SafeAreaView} flex={1} bg='softRed' style={{
       justifyContent: 'center',
       alignItems: 'center',
       paddingTop: insets.top,
@@ -18,8 +19,8 @@ function FavoriteView() {
       paddingLeft: insets.left,
       paddingRight: insets.right,
     }}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={theme.colors.softRed} />
       <Text>Favorite!</Text>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="white" />
     </Box>
   );
 }

@@ -12,6 +12,9 @@ export function CardConteiner({ children, ...props }) {
         </Button>
     )
 }
+export function CardHeader({children}){
+    return <Text fontSize={14} color="textMedium">{children}</Text>
+}
 
 export function CardTitle({ children }) {
     return (
@@ -23,3 +26,4 @@ export function CardTitle({ children }) {
 export function CardSummary({children}){
     return <Text fontSize={14} mt={8} color="textMedium">{children}</Text>
 }
+

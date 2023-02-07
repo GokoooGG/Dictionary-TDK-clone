@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native';
 import Box from './box';
 import Button from './button';
-import { Search, Bookmark, Calendar } from './icons'
+import { Search, Bookmark, RotateCcw } from './icons'
 import theme from '../utils/theme'
 import DropShadow from "react-native-drop-shadow";
 
@@ -12,7 +12,11 @@ function TabBar({ state, descriptors, navigation }) {
         <DropShadow style={{
             shadowColor: "#000",
             shadowOpacity: 0.1,
-            shadowRadius: 20,
+            shadowRadius: 24,
+            shadowOffset:{
+                width:0,
+                height:4,
+            }
         }}>
         <Box
             flexDirection="row"
@@ -63,7 +67,7 @@ function TabBar({ state, descriptors, navigation }) {
                         flex={1}
                         height={56}
                         onPress={onPress}>
-                        {label === 'History' && <Calendar stroke={isFocused ? theme.colors.red : theme.colors.textLight} />}
+                        {label === 'History' && <RotateCcw stroke={isFocused ? theme.colors.red : theme.colors.textLight} />}
                         {label === 'Favorite' && <Bookmark stroke={isFocused ? theme.colors.red : theme.colors.textLight} />}
                         <Box size={4} bg={isFocused ? "red" : ""} mt={6} borderRadius="full" />
                     </Button>

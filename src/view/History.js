@@ -11,7 +11,7 @@ import theme from '../utils/theme';
 function History() {
   const insets = useSafeAreaInsets();
   return (
-    <Box as={SafeAreaView} flex={1} style={{
+    <Box as={SafeAreaView} flex={1} bg='softRed' style={{
       justifyContent: 'center',
       alignItems: 'center',
       paddingTop: insets.top,

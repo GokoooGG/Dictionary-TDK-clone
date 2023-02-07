@@ -6,7 +6,7 @@ import {
 import Box from '../component/box';
 import { Logo } from '../component/icons';
 import SearchInput from '../component/searchInput';
-import { CardConteiner, CardSummary, CardTitle } from '../component/card';
+import { CardConteiner, CardSummary, CardTitle, CardHeader } from '../component/card';
 import FocusAwareStatusBar from '../component/FocusAwareStatusBar';
 import {
   SafeAreaView,
@@ -17,29 +17,35 @@ import theme from '../utils/theme';
 import bg from '../assets/bg.jpg'
 import { SimpleCardConteiner, SimpleCardTitle } from '../component/simpleCard';
 
+
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    header: 'Item 1',
     title: 'Item 1',
     summary: 'Summary 1'
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    header: 'Item 2',
     title: 'Item 2',
     summary: 'Summary 2'
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    header: 'Item 3',
     title: 'Item 3',
     summary: 'Summary 3'
   },
   {
     id: '58694a0f-3da1-571f-bd96-145571e29d72',
+    header: 'Item 4',
     title: 'Item 4',
     summary: 'Summary 4'
   },
   {
     id: '58694a0f-3da1-671f-bd96-145571e29d72',
+    header: 'Item 5',
     title: 'Item 5',
     summary: 'Summary 5'
   },
@@ -94,12 +100,7 @@ function SearchView({ navigation }) {
       }
 
       <Box as={Animated.View} position="relative" zIndex={1} height={heightInterpolate}
-        style={{
-          paddingTop: insets.top,
-          paddingBottom: insets.bottom,
-          paddingLeft: insets.left,
-          paddingRight: insets.right,
-        }}>
+       >
         {/* Background*/}
 
         <Box mt={-55} as={Animated.View} opacity={slideAnim}>
@@ -151,8 +152,10 @@ function SearchView({ navigation }) {
             <FlatList
               data={DATA}
               renderItem={({ item }) => (
+                
                 <Box py={5}>
-                  <CardConteiner mt={10} onPress={() => navigation.navigate("Detail")} >
+                  <CardHeader>{item.header}</CardHeader>
+                  <CardConteiner mt={10} onPress={() => navigation.navigate("Detail", { title: item.title })} >
                     <CardTitle>{item.title}</CardTitle>
                     <CardSummary>{item.summary}</CardSummary>
                   </CardConteiner>
