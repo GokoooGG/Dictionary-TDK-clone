@@ -9,13 +9,26 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import { DetailListContainer, DetailListTitle, DetailListContent } from '../component/detail-List'
+import DetailListContainer from '../component/detail-List'
 
-import { Hand, Sound, Favorite, SoundSolid } from "../component/icons"
+import { Hand, Favorite, SoundSolid } from "../component/icons"
 import theme from '../utils/theme';
+import LoaderText from '../component/loaderText';
 
-function DetailView() {
-  const insets = useSafeAreaInsets();
+function DetailView({ route }) {
+  const [data, setData] = React.useState(null)
+  const keyword = route.params?.keyword
+
+  const getDetailData = async () => {
+    const response = await fetch(`https://sozluk.gov.tr/gts?ara=${keyword}`)
+    const data = await response.json()
+    setData(data[0])
+  }
+
+  React.useEffect(() => {
+    getDetailData()
+  }, [])
+
   return (
     <Box as={SafeAreaView} bg="softRed" flex={1}>
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor={theme.colors.softRed} />
@@ -23,13 +36,15 @@ function DetailView() {
       <Box as={ScrollView} p={16} >
         <Box>
           <Text fontSize={32} fontWeight="bold" color="textDark">
-            Detay
+            {keyword}
           </Text>
-          <Text color="textLight" mt={6}>
-            Arapça Kalem
-          </Text>
+          {data?.telaffuz || data?.lisan ? (
+            <Text color="textLight" mt={6}>
+              {data?.telaffuz && data?.telaffuz} {data?.lisan}
+            </Text>
+          ) : null}
         </Box>
-        
+
         <Box flexDirection="row" mt={24}>
           <ActionButton ml={5}>
             <SoundSolid with={24} height={24} color={theme.colors.red} />
@@ -43,20 +58,20 @@ function DetailView() {
           </ActionButton>
         </Box>
         <Box mt={32}>
-          <DetailListContainer>
-            <DetailListTitle> Yazma .çasdkjhlhljh jjlashdjajshd ljasdjlhalshd alsdhaljshdlı</DetailListTitle>
-            <DetailListContent>Kağıt ajnskldnlajnsld lhjabsjdlbajlhbdlhj asldhb alsdl jasbd</DetailListContent>
-          </DetailListContainer>
-
-          <DetailListContainer border>
-            <DetailListTitle> Yazma .çasdkjhlhljh jjlashdjajshd ljasdjlhalshd alsdhaljshdlı</DetailListTitle>
-            <DetailListContent>Kağıt ajnskldnlajnsld lhjabsjdlbajlhbdlhj asldhb alsdl jasbd</DetailListContent>
-          </DetailListContainer>
-
-          <DetailListContainer border>
-            <DetailListTitle> Yazma .çasdkjhlhljh jjlashdjajshd ljasdjlhalshd alsdhaljshdlı</DetailListTitle>
-            <DetailListContent>Kağıt ajnskldnlajnsld lhjabsjdlbajlhbdlhj asldhb alsdl jasbd</DetailListContent>
-          </DetailListContainer>
+          {data
+            ? data.anlamlarListe.map(item => (
+              <DetailListContainer
+                key={item.anlam_sira}
+                data={item}
+                border={item.anlam_sira !== '1'}
+              />
+            ))
+            : [1, 2, 3].map(index => (
+              <DetailListContainer key={index} border={index !== 1}>
+                <LoaderText />
+                <LoaderText width={200} mt={10} />
+              </DetailListContainer>
+            ))}
         </Box>
       </Box>
     </Box>
