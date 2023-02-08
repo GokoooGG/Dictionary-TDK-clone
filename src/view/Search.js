@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Text, Animated, Pressable, ImageBackground, FlatList
+  Text, Animated, Pressable, ImageBackground, FlatList,ActivityIndicator
 } from 'react-native';
 
 import Box from '../component/box';
@@ -55,8 +55,20 @@ function SearchView({ navigation }) {
   const [isSearchFocus, setSearchFocus] = React.useState(false)
   const slideAnim = React.useRef(new Animated.Value(0)).current
   const [bgOpacity] = React.useState(new Animated.Value(1))
-  const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets()
   const searchInput = React.useRef()
+  const [homeData, setHomeData] = React.useState(null)
+
+  const getHomeData = async () => {
+    const response = await fetch("https://sozluk.gov.tr/icerik")
+    const data = await response.json()
+    setHomeData(data)
+  }
+
+  React.useEffect(() => {
+    getHomeData()
+  }, [])
+
 
   React.useEffect(() => {
     if (isSearchFocus) {
@@ -100,10 +112,10 @@ function SearchView({ navigation }) {
       }
 
       <Box as={Animated.View} position="relative" zIndex={1} height={heightInterpolate}
-       >
+      >
         {/* Background*/}
 
-        <Box mt={-55} as={Animated.View} opacity={slideAnim}>
+        <Box mt={-55} as={Animated.View} style={{ opacity: slideAnim }}>
           <Box pt={55}>
             <Box
               as={ImageBackground}
@@ -148,21 +160,36 @@ function SearchView({ navigation }) {
             />
           </Box>
         ) : (
-          <Box p={16} flex={1}>
-            <FlatList
-              data={DATA}
-              renderItem={({ item }) => (
-                
-                <Box py={5}>
-                  <CardHeader>{item.header}</CardHeader>
-                  <CardConteiner mt={10} onPress={() => navigation.navigate("Detail", { title: item.title })} >
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardSummary>{item.summary}</CardSummary>
-                  </CardConteiner>
-                </Box>
-              )}
-              keyExtractor={item => item.id}
-            />
+          <Box p={16} py={40} flex={1}>
+            <Box>
+              <Text color="textLight">Bir Kelime</Text>
+              <CardConteiner mt={10} onPress={() => navigation.navigate("Detail", { title: homeData?.kelime[0].madde })} >
+                {
+                  homeData ? (
+                    <>
+                      <CardTitle>{homeData?.kelime[0].madde}</CardTitle>
+                      <CardSummary>{homeData?.kelime[0].anlam}</CardSummary>
+                    </>
+                  ):
+                  <ActivityIndicator/>
+                }
+              </CardConteiner>
+            </Box>
+
+            <Box mt={40}>
+              <Text color="textLight">Bir deyim - Atasözü</Text>
+              <CardConteiner mt={10} onPress={() => navigation.navigate("Detail", { title: homeData?.atasoz[0].madde })} >
+              {
+                  homeData ? (
+                    <>
+                      <CardTitle>{homeData?.atasoz[0].madde}</CardTitle>
+                      <CardSummary>{homeData?.atasoz[0].anlam}</CardSummary>
+                    </>
+                  ):
+                  <ActivityIndicator/>
+                }
+              </CardConteiner>
+            </Box>
           </Box>
         )}
 
