@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, ImageBackground } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Box from '../component/box';
 import { Logo } from '../component/icons';
@@ -8,6 +9,7 @@ import bg from '../assets/bg.jpg'
 
 function SearchHome({ isSearchFocus, onSearchFocus, searchInput}) {
     const slideAnim = React.useRef(new Animated.Value(0)).current
+    const dispatch= useDispatch()
 
     React.useEffect(() => {
         if (isSearchFocus) {

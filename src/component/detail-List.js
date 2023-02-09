@@ -6,7 +6,7 @@ import Text from './text'
 export default function DetailListContainer({ data, children, border, ...props }) {
 
     const type = (data?.ozelliklerListe &&
-        data.ozelliklerListe.map(_ => _.tam_adi)) || ['isim']
+        data.ozelliklerListe.map(_ => _.tam_adi)) || ['']
 
     return (
         <Box bg="white" px={28} py={20} {...props}>

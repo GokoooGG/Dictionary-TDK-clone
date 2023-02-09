@@ -4,7 +4,8 @@ import { compose, color, size, space, typography, borderRadius , shadow} from 's
 import theme from "../utils/theme";
 
 const Input = styled(TextInput).attrs(props => ({
-    placeholderTextColor: theme.colors[props.placeholderTextColor] || '#999'
+    placeholderTextColor: theme.colors[props.placeholderTextColor] || '#999',
+    ...props
 }))(
     compose(
         color,

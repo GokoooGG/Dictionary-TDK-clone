@@ -7,40 +7,20 @@ import SearchHistoryList from '../component/search-history-list';
 import SuggestionCard from '../component/suggestion-card';
 import FocusAwareStatusBar from '../component/FocusAwareStatusBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 import theme from '../utils/theme';
 
 const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    header: 'Item 1',
-    title: 'Item 1',
-    summary: 'Summary 1'
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    header: 'Item 2',
-    title: 'Item 2',
-    summary: 'Summary 2'
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    header: 'Item 3',
-    title: 'Item 3',
-    summary: 'Summary 3'
-  },
-  {
-    id: '58694a0f-3da1-571f-bd96-145571e29d72',
-    header: 'Item 4',
-    title: 'Item 4',
-    summary: 'Summary 4'
-  },
+
 ];
 
 function SearchView({ navigation }) {
   const [isSearchFocus, setSearchFocus] = React.useState(false)
   const searchInput = React.useRef()
   const [homeData, setHomeData] = React.useState(null)
+  const searchHistory = useSelector((state) => state.dataReducer.searchHistory)
+
 
   const getHomeData = async () => {
     const response = await fetch("https://sozluk.gov.tr/icerik")
@@ -70,7 +50,7 @@ function SearchView({ navigation }) {
       }} flex={1} bg="softRed" pt={isSearchFocus ? 0 : 26}>
         {isSearchFocus ? (
           <Box flex={1}>
-            <SearchHistoryList data={DATA} />
+            <SearchHistoryList data={searchHistory} />
           </Box>
         ) : (
           <Box p={16} py={40} flex={1}>
@@ -91,7 +71,8 @@ function SearchView({ navigation }) {
               data={homeData?.atasoz[0]}
               onPress={() =>
                 navigation.navigate("Detail", {
-                  title: homeData?.atasoz[0].madde
+                  title: homeData?.atasoz[0].madde,
+                  keyword: homeData?.kelime[0].madde
                 })}
             />
           </Box>

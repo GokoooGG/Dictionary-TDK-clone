@@ -13,7 +13,7 @@ function SearchHistoryList ({data}){
         renderItem={({ item }) => (
           <Box py={6}>
             <SimpleCardConteiner>
-              <SimpleCardTitle>{item.title}</SimpleCardTitle>
+              <SimpleCardTitle>{item}</SimpleCardTitle>
             </SimpleCardConteiner>
           </Box>
         )}

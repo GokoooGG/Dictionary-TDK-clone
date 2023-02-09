@@ -5,10 +5,7 @@ import Text from '../component/text';
 import ActionButton, { ActionButtonTitle } from '../component/action-button';
 import Box from '../component/box';
 import FocusAwareStatusBar from '../component/FocusAwareStatusBar';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import DetailListContainer from '../component/detail-List'
 
 import { Hand, Favorite, SoundSolid } from "../component/icons"
@@ -57,6 +54,7 @@ function DetailView({ route }) {
             <ActionButtonTitle>Türk İşaret Dili</ActionButtonTitle>
           </ActionButton>
         </Box>
+        
         <Box mt={32}>
           {data
             ? data.anlamlarListe.map(item => (
