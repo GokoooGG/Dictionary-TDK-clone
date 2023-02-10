@@ -3,9 +3,10 @@ import Box from './box'
 import Button from './button'
 import Text from './text'
 
-export function SimpleCardConteiner({ children, ...props }) {
+export function SimpleCardConteiner({onPress, children, ...props }) {
     return (
-        <Button justifyContent="flex-start" bg='white' borderRadius="normal" p={16}{...props}>
+        <Button justifyContent="flex-start" bg='white' borderRadius="normal" p={16} onPress={onPress}
+            {...props}>
             {children}
         </Button>
     )

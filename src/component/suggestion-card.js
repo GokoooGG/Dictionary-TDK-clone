@@ -1,5 +1,4 @@
 import React from 'react'
-import { ActivityIndicator } from 'react-native'
 
 import Text from './text'
 import Box from './box'

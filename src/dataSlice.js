@@ -4,7 +4,6 @@ export const dataSlice = createSlice({
   name: 'addData',
   initialState: {
     searchHistory: [
-
     ]
   },
   reducers: {

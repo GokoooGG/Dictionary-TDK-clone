@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {  Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 
 import Box from '../component/box';
 import SearchHome from '../component/search-home';
@@ -19,7 +19,7 @@ function SearchView({ navigation }) {
   const [isSearchFocus, setSearchFocus] = React.useState(false)
   const searchInput = React.useRef()
   const [homeData, setHomeData] = React.useState(null)
-  const searchHistory = useSelector((state) => state.dataReducer.searchHistory)
+  const searchHistory = useSelector((state) => state.persistedReducer.searchHistory)
 
 
   const getHomeData = async () => {
@@ -50,7 +50,9 @@ function SearchView({ navigation }) {
       }} flex={1} bg="softRed" pt={isSearchFocus ? 0 : 26}>
         {isSearchFocus ? (
           <Box flex={1}>
-            <SearchHistoryList data={searchHistory} />
+            <SearchHistoryList
+              navigation={navigation}
+              data={searchHistory} />
           </Box>
         ) : (
           <Box p={16} py={40} flex={1}>

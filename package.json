@@ -11,6 +11,7 @@
     "svgr": "npx svgr -d, --svgo-config .svgorc.json --out-dir ./src/component/icons --native --svg-props className=,color=black  -- ./src/icons "
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/material-top-tabs": "^6.5.2",
     "@react-navigation/native": "^6.1.3",
@@ -28,6 +29,7 @@
     "react-native-tab-view": "^3.3.4",
     "react-redux": "^8.0.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
     "styled-system": "^5.1.5"
   },
