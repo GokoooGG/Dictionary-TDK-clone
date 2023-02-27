@@ -11,8 +11,7 @@ import { useSelector } from 'react-redux';
 
 import theme from '../utils/theme';
 
-const DATA = [
-];
+
 
 function SearchView({ navigation }) {
   const [isSearchFocus, setSearchFocus] = React.useState(false)
